@@ -7,22 +7,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.student.a2018011701.data.Main2Activity;
 import com.example.student.a2018011701.data.StudentSourceDAO;
+import com.example.student.a2018011701.data.student;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     final public static StudentSourceDAO dao = new StudentSourceDAO();//static可以讓整個APP都可以用，不用NEW
-    ArrayAdapter<String> adapter;
-    Context context;
-    StudentSourceDAO stu;
+    ListView lv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,stu);
     }
 
+    @Override
+    protected void onResume() {//回來的時候會啟動(比onCreate適合)
+        super.onResume();
+        lv=(ListView)findViewById(R.id.listview);
+        ArrayList<String> studentName=new ArrayList<>();
+        for(student s:dao.getList()){
+            studentName.add(s.name);
+        }
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,studentName);
+        lv.setAdapter(adapter);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item,menu);
