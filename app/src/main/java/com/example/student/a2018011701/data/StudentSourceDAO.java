@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class StudentSourceDAO {
+
     public ArrayList<student> mylist;
     //新增一個內含student(類別)變數的物件，因為不只一種型態的變數，
     // 所以無法把所有變數都用int String Object之類的物件去賦予型態，
