@@ -55,7 +55,7 @@ public class ExampleUnitTest {
     public void test_add_data6() throws  Exception{
         StudentSourceDAO dao = new StudentSourceDAO();
         dao.add(new student(1, "Bob", 95));
-        dao.add(new student(2, "Mary", 90));
-        assertEquals(null, dao.getStudent(3));
+        dao.delete(2);//引數並非像查詢有student,所以不用new他拉
+        assertEquals(null, dao.getStudent(1));
     }
 }
