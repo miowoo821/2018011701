@@ -31,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Intent it=new Intent(MainActivity.this, Main2Activity.class);
+        if (item.getItemId() == R.id.add) {//假設點擊的menu裡面add(+)的選項就執行下列程式碼
+            Intent it = new Intent(MainActivity.this, Main2Activity.class);
+            startActivity(it);
+        }
         return super.onOptionsItemSelected(item);
     }
 }
