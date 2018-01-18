@@ -24,6 +24,7 @@ public class Main3Activity extends AppCompatActivity {
     EditText ed1;
     EditText ed2;
     EditText ed3;
+    boolean fastBack = false;//修改完可以直接跳過本頁回到主頁
 int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不用每個方法都要弄一個
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +93,16 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
     public void clicknewedit(View v){
         Intent it=new Intent(Main3Activity.this,newedit.class);
         it.putExtra("position",id);
-
+        fastBack = true;//進入newedit頁面的時候把fastBack變數改為true，這樣出來的時候會啟動nResume，
+        // 偵測fastBack若等於true時會快速關閉，副作用，沒修改退出也會直接回主頁
         startActivity(it);
     }
     protected void onResume() {//第一次也會執行，依序是onCreate、onStart、onResume；對話框結束不會跑onResume的樣子欸
         super.onResume();
+        if (fastBack)
+        {
+            finish();
+        }
         //student s;//放到最上面當成員變數比較好，建一次大家都能用
         s=MainActivity.dao.getStudent(id);
         ed2.setText(String.valueOf(s.name));

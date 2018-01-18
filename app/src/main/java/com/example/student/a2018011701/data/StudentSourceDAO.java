@@ -15,7 +15,7 @@ public class StudentSourceDAO  implements StudentFileDAO2{
 
     public StudentSourceDAO()    {        mylist = new ArrayList<>();    }
 
-    public void add(student s)    { //創造一個方法，並設定若要使用這個方法必須要填入student的物件當作引數，例：mylist.add(s);
+    public boolean add(student s)    { //創造一個方法，並設定若要使用這個方法必須要填入student的物件當作引數，例：mylist.add(s);
         mylist.add(s);
         //Q：為什麼ArrayList物件可以使用這個方法(add)？
         //A：因為你誤會了，這邊的mylist.add所使用的是ArrayList自己的方法，
@@ -24,6 +24,7 @@ public class StudentSourceDAO  implements StudentFileDAO2{
         // 此意思是，新增一個student物件，裡面含有三個引數，分別是int變數,String變數,int變數，
         //再把含有這三個變數的student物件丟進StudentSourceDAO.add的方法所需求的引數中
         // 接著執行StudentSourceDAO的add方法，所以最終執行的結果就會是ArrayList物件裡面多了一個list(有三欄)
+        return true;
     }
     public ArrayList<student> getList()    {
         return mylist;
