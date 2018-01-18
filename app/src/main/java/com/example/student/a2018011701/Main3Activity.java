@@ -95,11 +95,12 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
 
         startActivity(it);
     }
-    protected void onResume() {
+    protected void onResume() {//第一次也會執行，依序是onCreate、onStart、onResume
         super.onResume();
         //student s;//放到最上面當成員變數比較好，建一次大家都能用
         s=MainActivity.dao.getStudent(id);
         ed2.setText(String.valueOf(s.name));
         ed3.setText(String.valueOf(s.score));
+        Log.d("GGGGGGGGGGGGG",s.name);
     }
 }
