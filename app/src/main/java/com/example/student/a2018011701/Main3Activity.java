@@ -73,6 +73,7 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
             public void onClick(DialogInterface dialogInterface, int i) {
                 MainActivity.dao.delete(id);
                 Toast.makeText(Main3Activity.this,"已刪除",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -81,7 +82,8 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
 
             }
         });
-        finish();
+        builder.show();
+
     }
     public void clickback(View v){
 //        Intent it=new Intent(Main3Activity.this,MainActivity.class);

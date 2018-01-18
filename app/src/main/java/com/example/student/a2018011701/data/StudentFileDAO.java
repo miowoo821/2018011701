@@ -51,7 +51,7 @@ public class StudentFileDAO implements StudentFileDAO2 { //implements硬性規�
         }
     }
     private  void loadFile(){
-        File f=new File(context.getFilesDir(),"mydata");
+        File f=new File(context.getFilesDir(),"mydata.txt");
         FileReader fr=null;//(為什麼這邊不能直接給他NEW?其實可以拉，要記得加try catch
 
         try {
