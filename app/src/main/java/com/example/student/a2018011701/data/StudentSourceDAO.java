@@ -37,7 +37,7 @@ public class StudentSourceDAO {
         }
         return null;
     }
-    public boolean update(student s) {
+    public boolean update(student s) {//假設我需要回傳的值是 TRUE或FALSE就用boolean,但現在其實用不到
         //要傳入完整的變數就用student s，
         // 意思就是新增一個student物件,命名為s，
         // 爾後在使用這個方法的時候，就會需要輸入student的完整建構式
@@ -45,12 +45,14 @@ public class StudentSourceDAO {
             //新增一個student物件,命名為t，掛載mylist
             //
             if (t.id == s.id) {
+                //下面是要update的東西
                 t.name = s.name;//把mylist的name,改為新的s物件裡面的name
                 t.score = s.score;//把mylist的score,改為新的s物件裡面的score
-                return true;
+               return true;//假設他找的到這個ID，就回傳true，但現在這個true沒有被使用?
+                //一個return就會中斷整個方法，不可能回傳多個值 (嗎)
             }
         }
-        return false;
+        return false;//沒有找到就回傳false
     }
     public boolean delete(int id) {//什麼時候用(student s)，什麼時候用(int id)???
         //參數預設只有一個int id，爾後只要輸入id就可以使用這個方法

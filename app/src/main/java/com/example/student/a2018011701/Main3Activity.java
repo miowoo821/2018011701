@@ -19,6 +19,7 @@ import com.example.student.a2018011701.data.student;
 import static com.example.student.a2018011701.MainActivity.dao;
 
 public class Main3Activity extends AppCompatActivity {
+    student s;
     TextView tv1;
     EditText ed1;
     EditText ed2;
@@ -38,7 +39,7 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
         //int pos=it.getIntExtra("position",0);//這兩行不如下面一行
         id=getIntent().getIntExtra("position",0);//傳過來的資料是int一定要用getIntExtra
         //一次在這邊給他，以後就可以直接拿來用
-        student s;
+        //student s;//放到最上面當成員變數比較好，建一次大家都能用
         s=MainActivity.dao.getStudent(id);
 
         Log.d("GGGGGGGGGGGGGGG","56455");
@@ -55,6 +56,7 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
 
         MainActivity.dao.update(new student(id,name,score));
         Toast.makeText(Main3Activity.this,"修改完成",Toast.LENGTH_SHORT).show();
+        if( MainActivity.dao.update(new student(id,name,score)))
 
         finish();
     }
@@ -92,5 +94,12 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
         it.putExtra("position",id);
 
         startActivity(it);
+    }
+    protected void onResume() {
+        super.onResume();
+        //student s;//放到最上面當成員變數比較好，建一次大家都能用
+        s=MainActivity.dao.getStudent(id);
+        ed2.setText(String.valueOf(s.name));
+        ed3.setText(String.valueOf(s.score));
     }
 }
