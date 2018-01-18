@@ -12,19 +12,27 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.student.a2018011701.data.Main2Activity;
+import com.example.student.a2018011701.data.StudentFileDAO;
 import com.example.student.a2018011701.data.StudentSourceDAO;
 import com.example.student.a2018011701.data.student;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    final public static StudentSourceDAO dao = new StudentSourceDAO();//static可以讓整個APP都可以用，不用NEW
+    //改用StudentFileDAO了,有存檔功能
+    //final public static StudentSourceDAO dao = new StudentSourceDAO();//static可以讓整個APP都可以用，不用NEW
+    //final public static StudentFileDAO dao= new StudentFileDAO();
+    // 因為現在有引數必須填進去(上面那個的建構式沒寫引數所以可以在這區給)，所以不能在這邊給了，要在onCreate給
+
+    public static StudentFileDAO dao;//
+
     ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dao=new StudentFileDAO(MainActivity.this);//把這個頁面當作引數給這個類別，可以達到繼承的效果?
     }
 
     @Override

@@ -95,7 +95,7 @@ int id;//寫在這邊當成員變數，本頁面的大家就都可以用，不�
 
         startActivity(it);
     }
-    protected void onResume() {//第一次也會執行，依序是onCreate、onStart、onResume
+    protected void onResume() {//第一次也會執行，依序是onCreate、onStart、onResume；對話框結束不會跑onResume的樣子欸
         super.onResume();
         //student s;//放到最上面當成員變數比較好，建一次大家都能用
         s=MainActivity.dao.getStudent(id);
