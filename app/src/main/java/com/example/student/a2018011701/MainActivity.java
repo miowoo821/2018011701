@@ -11,8 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.student.a2018011701.data.DBType;
 import com.example.student.a2018011701.data.Main2Activity;
 import com.example.student.a2018011701.data.StudentFileDAO;
+import com.example.student.a2018011701.data.StudentFileDAO2;
+import com.example.student.a2018011701.data.StudentFileDAOFactory;
 import com.example.student.a2018011701.data.StudentSourceDAO;
 import com.example.student.a2018011701.data.student;
 
@@ -24,15 +27,17 @@ public class MainActivity extends AppCompatActivity {
     //final public static StudentFileDAO dao= new StudentFileDAO();
     // 因為現在有引數必須填進去(上面那個的建構式沒寫引數所以可以在這區給)，所以不能在這邊給了，要在onCreate給
 
-    public static StudentFileDAO dao;//
-
+    public static StudentFileDAO2 dao;//
+    DBType dbType;
     ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dao=new StudentFileDAO(MainActivity.this);//把這個頁面當作引數給這個類別，可以達到繼承的效果?
+        //換成業界作法dao=new StudentFileDAO(MainActivity.this);//把這個頁面當作引數給這個類別，可以達到繼承的效果?
+        dbType = DBType.FILE; // 1:記憶體 2:檔案
+        dao = StudentFileDAOFactory.getDAOInstance(this, dbType);
     }
 
     @Override
