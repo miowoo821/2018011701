@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 Intent it=new Intent(MainActivity.this,Main3Activity.class);
                 it.putExtra("position",dao.getList().get(i).id);
 
