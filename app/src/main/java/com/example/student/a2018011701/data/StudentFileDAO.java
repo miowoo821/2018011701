@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 //將StudentSourceDAO的處理方式改為可以存檔，而非只在記憶體
-public class StudentFileDAO {
+public class StudentFileDAO implements StudentFileDAO2 { //implements硬性規定你一定要有哪些方法
     Context context;//因為Context
     //要使用getFilesDir的方法必須繼承AppCompatActivity，而AppCompatActivity的getFilesDir又是來自他的父不知道幾代的Context類別
     //所以乾脆創造一個Context物件，透過這個物件使用getFilesDir方法
@@ -30,9 +30,9 @@ public class StudentFileDAO {
     //因此用<student>,一次賦予int Strt的型態給其class裡面相對應的變數
 
     public StudentFileDAO(Context context)    {//建構式記得加入context，才有辦法從外面讀進來(?)
-
-        mylist = new ArrayList<>();
         this.context=context;
+        mylist = new ArrayList<>();
+
     }
 
     private void saveFile(){
@@ -69,7 +69,7 @@ public class StudentFileDAO {
         }
 
     }
-    public void add(student s)    { //創造一個方法，並設定若要使用這個方法必須要填入student的物件當作引數，例：mylist.add(s);
+    public boolean add(student s)    { //創造一個方法，並設定若要使用這個方法必須要填入student的物件當作引數，例：mylist.add(s);
 
         mylist.add(s);
         //Q：為什麼ArrayList物件可以使用這個方法(add)？
@@ -80,6 +80,7 @@ public class StudentFileDAO {
         //再把含有這三個變數的student物件丟進StudentSourceDAO.add的方法所需求的引數中
         // 接著執行StudentSourceDAO的add方法，所以最終執行的結果就會是ArrayList物件裡面多了一個list(有三欄)
         saveFile();
+        return true;
     }
     public ArrayList<student> getList()    {
         loadFile();//先load才有辦法顯示，不然是空的

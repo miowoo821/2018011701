@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Student on 2018/1/17.
  */
 
-public class StudentSourceDAO {
+public class StudentSourceDAO  implements StudentFileDAO2{
 
     public ArrayList<student> mylist;
     //新增一個內含student(類別)變數的物件，因為不只一種型態的變數，
