@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //換成業界作法dao=new StudentFileDAO(MainActivity.this);//把這個頁面當作引數給這個類別，可以達到繼承的效果?
-        dbType = DBType.FILE; // 1:記憶體 2:檔案
+        dbType = DBType.DB; // 1:記憶體 2:檔案 3:SQLite
         dao = StudentFileDAOFactory.getDAOInstance(this, dbType);
     }
 
