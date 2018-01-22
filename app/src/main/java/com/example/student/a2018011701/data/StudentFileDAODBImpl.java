@@ -50,16 +50,26 @@ public class StudentFileDAODBImpl implements StudentFileDAO2 {
 
     @Override
     public student getStudent(int id) {
+        Cursor c=db.query("students", new String[] {"_id", "name", "score"}, "_id=?", new String[]{String.valueOf(id)}, null, null, null);
+        if(c.moveToFirst()) {
+            student s1 = new student(c.getInt(0), c.getString(1), c.getInt(2));
+            return s1;
+        }
         return null;
     }
 
     @Override
     public boolean update(student s) {
-        return false;
+        ContentValues cv = new ContentValues();
+        cv.put("name", s.name);
+        cv.put("score", s.score);
+        db.update("students", cv, "_id=?", new String[] {String.valueOf(s.id)});
+        return true;
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        db.delete("students", "_id=?", new String[] {String.valueOf(id)});
+        return true;
     }
 }
