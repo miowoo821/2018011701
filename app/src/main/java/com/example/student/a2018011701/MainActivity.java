@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     DBType dbType;
     ListView lv;
 
+    ArrayList<String> studentName;
+    ArrayAdapter<String> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +40,10 @@ public class MainActivity extends AppCompatActivity {
         //換成業界作法dao=new StudentFileDAO(MainActivity.this);//把這個頁面當作引數給這個類別，可以達到繼承的效果?
         dbType = DBType.CLOUD; // 1:記憶體 2:檔案 3:SQLite
         dao = StudentFileDAOFactory.getDAOInstance(this, dbType);
-    }
 
-    @Override
-    protected void onResume() {//回來的時候會啟動(比onCreate適合)
-        super.onResume();
+        studentName=new ArrayList<>();
+        adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,studentName);
         lv=(ListView)findViewById(R.id.listview);
-        ArrayList<String> studentName=new ArrayList<>();//新增一個叫做studentName的ArrayList
-        for(student s:dao.getList()){//把dao.getList得到的長度丟回s,藉此決定迴圈次數
-            studentName.add(s.name);//每次add一個
-        }
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,studentName);
-        //ArrayAdapter
-
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,6 +56,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {//回來的時候會啟動(比onCreate適合)
+        super.onResume();
+        refreshData();
+        //lv=(ListView)findViewById(R.id.listview);
+        //修正，把賦值拉到oncreat，因為onResume沒必要每次都新增一次,一次就好，onResume呼叫就好
+        //ArrayList<String> studentName=new ArrayList<>();//新增一個叫做studentName的ArrayList
+        //修正，把新增升級到最外層，因為onResume沒必要每次都新增一次
+        //studentName=new ArrayList<>();
+        //再修正，把賦值拉到oncreat，因為onResume沒必要每次都新增一次,一次就好，onResume呼叫就好
+//        for(student s:dao.getList()){//把dao.getList得到的長度丟回s,藉此決定迴圈次數
+//            studentName.add(s.name);//每次add一個
+//        }
+        //移至新方法refreshData
+        //ArrayAdapter<String> adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,studentName);
+        //修正，把新增升級到最外層，因為onResume沒必要每次都新增一次
+        //adapter=new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,studentName);
+        //再修正，把賦值拉到oncreat，因為onResume沒必要每次都新增一次,一次就好，onResume呼叫就好
+
+        //ArrayAdapter
+//        lv.setAdapter(adapter);
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                Intent it=new Intent(MainActivity.this,Main3Activity.class);
+//                it.putExtra("position",dao.getList().get(i).id);
+//
+//                startActivity(it);
+//            }
+//        });
+// 修正，提升到oncreate做
+    }
+    public void refreshData(){
+        studentName.clear();
+        for(student s:dao.getList()){//把dao.getList得到的長度丟回s,藉此決定迴圈次數
+            studentName.add(s.name);//每次add一個
+        }
+        adapter.notifyDataSetChanged();//一定要加這個
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.item,menu);

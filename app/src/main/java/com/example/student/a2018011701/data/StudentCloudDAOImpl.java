@@ -3,6 +3,7 @@ package com.example.student.a2018011701.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.student.a2018011701.MainActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +40,7 @@ public class StudentCloudDAOImpl implements StudentFileDAO2 { //implements硬性
     FirebaseDatabase database;
     DatabaseReference myRef;
 
-    public StudentCloudDAOImpl(Context context)    {//建構式記得加入context，才有辦法從外面讀進來(?)
+    public StudentCloudDAOImpl(final Context context)    {//建構式記得加入context，才有辦法從外面讀進來(?)
         this.context=context;
 //        mylist = new ArrayList<>();
 
@@ -57,6 +58,7 @@ public class StudentCloudDAOImpl implements StudentFileDAO2 { //implements硬性
                 Gson gson = new Gson();
                 mylist = gson.fromJson(value, new TypeToken<ArrayList<student>>(){}.getType());
                 Log.d(TAG, "Value is: " + value);
+                ((MainActivity) context).refreshData();//叫這個context執行更新的動作？
             }
 
             @Override
