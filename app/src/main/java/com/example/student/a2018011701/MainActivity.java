@@ -51,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent it=new Intent(MainActivity.this,Main3Activity.class);
                 it.putExtra("position",dao.getList().get(i).id);
-
+                //因為getList是回傳mylist(Arratlist物件)所以有get的方法
+                //為什麼要用dao.getList().get(i).id？不直接用i+1
+                //因為這是抓  mylist  裡面第i個位置的資料，不一定是數字，也不一定連號，用i+1也行只是剛好而已
                 startActivity(it);
             }
         });

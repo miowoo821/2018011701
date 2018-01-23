@@ -42,7 +42,7 @@ public class StudentCloudDAOImpl implements StudentFileDAO2 { //implements硬性
 
     public StudentCloudDAOImpl(final Context context)    {//建構式記得加入context，才有辦法從外面讀進來(?)
         this.context=context;
-//        mylist = new ArrayList<>();
+       mylist = new ArrayList<>();
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("Student");
@@ -57,6 +57,10 @@ public class StudentCloudDAOImpl implements StudentFileDAO2 { //implements硬性
                 String value = dataSnapshot.getValue(String.class);
                 Gson gson = new Gson();
                 mylist = gson.fromJson(value, new TypeToken<ArrayList<student>>(){}.getType());
+                if (mylist == null)
+                {
+                    mylist = new ArrayList<>();
+                }
                 Log.d(TAG, "Value is: " + value);
                 ((MainActivity) context).refreshData();//叫這個context執行更新的動作？
             }
@@ -67,10 +71,7 @@ public class StudentCloudDAOImpl implements StudentFileDAO2 { //implements硬性
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-        if (mylist == null)
-        {
-            mylist = new ArrayList<>();
-        }
+
     }
 
     private void saveFile(){
