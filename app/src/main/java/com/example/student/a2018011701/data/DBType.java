@@ -5,5 +5,5 @@ package com.example.student.a2018011701.data;
  */
 
 public enum DBType {
-    MEMORY, FILE,DB
+    MEMORY, FILE,DB,CLOUD
 }

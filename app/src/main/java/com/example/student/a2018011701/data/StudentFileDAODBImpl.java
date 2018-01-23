@@ -20,6 +20,9 @@ public class StudentFileDAODBImpl implements StudentFileDAO2 {
         this.context = context;
         MyDbHelper helper = new MyDbHelper(context);
         db = helper.getWritableDatabase();
+
+
+
     }
     @Override
     public boolean add(student s) {
